@@ -29,7 +29,8 @@ public class DrawPad : MonoBehaviour, IInteractable
     [SerializeField]
     private Door doorToOpen;
 
-    private int[] code;
+    [SerializeField]
+    private CodeRoom room;
 
     public MNISTEngine mnist;
 
@@ -105,7 +106,6 @@ public class DrawPad : MonoBehaviour, IInteractable
         predictionText.text = "?";
         ToggleText(false, predictionText);
         ToggleText(false, interactText);
-        code = new int[] { 1, 1, 1 }; 
     }
 
     private void ToggleText(bool isVisible, TMP_Text textToToggle)
@@ -124,7 +124,7 @@ public class DrawPad : MonoBehaviour, IInteractable
         probability = probabilityAndIndex.Item1;
         predictedNumber = probabilityAndIndex.Item2;
         predictionText.text = predictedNumber.ToString();
-        if(predictedNumber == code[numbersGuessed])
+        if(predictedNumber == room.code[numbersGuessed])
         {
             numbersGuessed++;
             GetComponent<AudioSource>().PlayOneShot(digitSuccess);
@@ -145,15 +145,5 @@ public class DrawPad : MonoBehaviour, IInteractable
             GetComponent<AudioSource>().PlayOneShot(codeFailed);
         }
         drawingCanvas.ClearTexture();
-    }
-
-    private int[] GenerateRandomCode(int codeLength)
-    {
-        code = new int[codeLength];
-        for (int i = 0; i < codeLength; i++)
-        {
-            code[i] = Random.Range(0, 9);
-        }
-        return code;
     }
 }
