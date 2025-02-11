@@ -4,10 +4,9 @@ using UnityEngine.UI;
 
 public class CustomButton : MonoBehaviour
 {
-    [SerializeField]
-    private Vector3 pressedOffset = new Vector3(0, 0, -0.1f); // How much the button moves
-    [SerializeField]
-    private float pressSpeed = 0.1f; // How fast it moves
+    [SerializeField] private Vector3 pressedOffset = new Vector3(0, 0, -0.1f); // How much the button moves
+
+    [SerializeField] private float pressSpeed = 0.1f; // How fast it moves
     
     private Button button; //Button reference
 

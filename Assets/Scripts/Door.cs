@@ -5,14 +5,11 @@ public class Door : MonoBehaviour
 {
     public bool isOpen = false;
 
-    [SerializeField]
-    private Vector3 SlideDirection = Vector3.back;
+    [SerializeField] private Vector3 SlideDirection = Vector3.back;
 
-    [SerializeField]
-    private float SlideAmount = 1.9f;
+    [SerializeField] private float SlideAmount = 1.9f;
 
-    [SerializeField]
-    private float Speed = 1f;
+    [SerializeField] private float Speed = 1f;
 
     private Vector3 startPosition;
 

@@ -6,38 +6,43 @@ using UnityEngine.InputSystem.LowLevel;
 public class Interactor : MonoBehaviour
 {
 
-    [SerializeField]
-    private LayerMask interactionLayer;
+    [SerializeField] private LayerMask interactionLayer;
 
-    [SerializeField]
-    private SphereCollider interactionCollider;
+    [SerializeField] private CinemachineVirtualCamera playerCamera;
 
-    [SerializeField]
-    private CinemachineVirtualCamera playerCamera;
+    [Header("Raycast Info")]
+    [SerializeField] private float rayLength = 5f;
 
     private GameObject interactableActor;
 
     private bool isInteracting;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.GetComponent<IInteractable>() != null)
+        if (Physics.Raycast(Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)), transform.forward, out RaycastHit hit, rayLength, interactionLayer))
         {
-            interactableActor = other.gameObject;
-            //Highlight object
+            Debug.Log(hit.collider.name);
+            var interactableObject = hit.collider.gameObject;
+            if (interactableObject.GetComponent<IInteractable>() != null)
+            {
+                interactableActor = interactableObject;
+                interactableActor.GetComponent<IInteractable>().InRange(true);
+                //Highlight object
+            }
+            else
+            {
+                interactableActor.GetComponent<IInteractable>().InRange(false);
+                interactableActor = null;
+            }
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        interactableActor = null;
+        else
+        {
+            interactableActor = null;
+        }
+        if (interactableActor != null)
+        {
+            //noteController.Interact(GameObject.FindGameObjectWithTag("Player").GetComponent<Interactor>());
+        }
     }
 
     public void Interact()

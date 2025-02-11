@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class RandomCode : MonoBehaviour
 {
-    [SerializeField]
-    private int codeLength;
+    [SerializeField] private int codeLength;
 
     public int[] code;
 

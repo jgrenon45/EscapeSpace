@@ -5,32 +5,23 @@ using UnityEngine.UIElements;
 
 public class DrawPad : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    private string prompt;
+    [SerializeField] private string prompt;
 
-    [SerializeField]
-    private TMP_Text predictionText;
+    [SerializeField] private TMP_Text predictionText;
 
-    [SerializeField]
-    private float transitionSpeed = 5.0f;
+    [SerializeField] private float transitionSpeed = 5.0f;
 
-    [SerializeField]
-    private int codeLength = 3;
+    [SerializeField] private int codeLength = 3;
 
-    [SerializeField]
-    private AudioClip codeSuccess;
+    [SerializeField]private AudioClip codeSuccess;
 
-    [SerializeField]
-    private AudioClip codeFailed;
+    [SerializeField] private AudioClip codeFailed;
 
-    [SerializeField]
-    private AudioClip digitSuccess;
+    [SerializeField] private AudioClip digitSuccess;
 
-    [SerializeField]
-    private Door doorToOpen;
+    [SerializeField] private Door doorToOpen;
 
-    [SerializeField]
-    private CodeRoom room;
+    [SerializeField] private CodeRoom room;
 
     public MNISTEngine mnist;
 
@@ -48,7 +39,8 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     public string InteractionText { get => prompt; }
 
-    public bool IsInteractable { get; private set; }
+    public bool IsInteractable { get; set; }
+
 
     public void Interact(Interactor interactor)
     {
@@ -72,27 +64,15 @@ public class DrawPad : MonoBehaviour, IInteractable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void InRange(bool inRange)
     {
-        //Toggle the interact text when the player is in range
-        if (IsInteractable)
+        if (inRange)
         {
-            if (other.GetComponent<Interactor>() != null)
-            {
-                ToggleText(true, interactText);
-            }
+            ToggleText(true, interactText);
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        //Toggle the interact text when the player is out of range
-        if (IsInteractable)
+        else
         {
-            if (other.GetComponent<Interactor>() != null)
-            {
-                ToggleText(false, interactText);
-            }
+            ToggleText(false, interactText);
         }
     }
 

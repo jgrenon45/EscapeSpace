@@ -6,8 +6,7 @@ public class CodeRoom : Room
 {
     private BoxCollider roomBounds;
 
-    [SerializeField]
-    private GameObject [] numbersPrefabs;
+    [SerializeField] private GameObject [] numbersPrefabs;
 
     public int[] code;
 

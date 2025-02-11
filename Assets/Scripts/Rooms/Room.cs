@@ -6,8 +6,7 @@ public class Room : MonoBehaviour
 {
     private BoxCollider roomBounds;
 
-    [SerializeField]
-    protected Transform[] randomPositions;
+    [SerializeField] protected Transform[] randomPositions;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
