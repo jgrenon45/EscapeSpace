@@ -21,13 +21,11 @@ public class Interactor : MonoBehaviour
     {
         if (Physics.Raycast(Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0)), transform.forward, out RaycastHit hit, rayLength, interactionLayer))
         {
-            Debug.Log(hit.collider.name);
             var interactableObject = hit.collider.gameObject;
             if (interactableObject.GetComponent<IInteractable>() != null)
             {
                 interactableActor = interactableObject;
                 interactableActor.GetComponent<IInteractable>().InRange(true);
-                //Highlight object
             }
             else
             {
@@ -37,12 +35,12 @@ public class Interactor : MonoBehaviour
         }
         else
         {
-            interactableActor = null;
-        }
-        if (interactableActor != null)
-        {
-            //noteController.Interact(GameObject.FindGameObjectWithTag("Player").GetComponent<Interactor>());
-        }
+            if (interactableActor != null)
+            {
+                interactableActor.GetComponent<IInteractable>().InRange(false);
+                interactableActor = null;
+            }
+        }       
     }
 
     public void Interact()

@@ -9,6 +9,8 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     [SerializeField] private TMP_Text predictionText;
 
+    [SerializeField] private TMP_Text interactText;
+
     [SerializeField] private float transitionSpeed = 5.0f;
 
     [SerializeField] private int codeLength = 3;
@@ -24,8 +26,6 @@ public class DrawPad : MonoBehaviour, IInteractable
     [SerializeField] private CodeRoom room;
 
     public MNISTEngine mnist;
-
-    private TMP_Text interactText;
 
     private bool isInteracting = false;
 
@@ -66,7 +66,7 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     public void InRange(bool inRange)
     {
-        if (inRange)
+        if (inRange && !isInteracting && IsInteractable)
         {
             ToggleText(true, interactText);
         }
@@ -81,7 +81,6 @@ public class DrawPad : MonoBehaviour, IInteractable
     {
         IsInteractable = true;
         drawingCanvas = GetComponentInChildren<Draw>();
-        interactText = GetComponentInChildren<TMP_Text>();
         interactText.text = InteractionText;
         predictionText.text = "?";
         ToggleText(false, predictionText);
@@ -104,7 +103,7 @@ public class DrawPad : MonoBehaviour, IInteractable
         probability = probabilityAndIndex.Item1;
         predictedNumber = probabilityAndIndex.Item2;
         predictionText.text = predictedNumber.ToString();
-        if(predictedNumber == room.code[numbersGuessed])
+        if(predictedNumber == room.GetCode()[numbersGuessed])
         {
             numbersGuessed++;
             GetComponent<AudioSource>().PlayOneShot(digitSuccess);

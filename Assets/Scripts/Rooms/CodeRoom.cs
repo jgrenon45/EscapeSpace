@@ -8,14 +8,16 @@ public class CodeRoom : Room
 
     [SerializeField] private GameObject [] numbersPrefabs;
 
-    public int[] code;
+    private int[] code;
+
+    public delegate void OnCodeGenerated();
+    public OnCodeGenerated onCodeGenerated;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         roomBounds = GetComponent<BoxCollider>();
         code = GenerateRandomCode(3);
-        SetRandomPositions();
     }
 
     private void SetRandomPositions()
@@ -40,7 +42,20 @@ public class CodeRoom : Room
         {
             code[i] = Random.Range(0, 9);
         }
+        onCodeGenerated?.Invoke();
         return code;
     }
+
+    public string GetCodeToString()
+    {
+        string codeString = "";
+        for (int i = 0; i < code.Length; i++)
+        {
+            codeString += code[i].ToString();
+        }
+        return codeString;
+    }
+
+    public int[] GetCode() { return code; }
 
 }
