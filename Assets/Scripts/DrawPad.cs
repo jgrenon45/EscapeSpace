@@ -15,13 +15,7 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     [SerializeField] private int codeLength = 3;
 
-    [SerializeField]private AudioClip codeSuccess;
-
-    [SerializeField] private AudioClip codeFailed;
-
-    [SerializeField] private AudioClip digitSuccess;
-
-    [SerializeField] private Door doorToOpen;
+    [SerializeField] private OpenableObject objectToOpen;
 
     [SerializeField] private CodeRoom room;
 
@@ -106,12 +100,13 @@ public class DrawPad : MonoBehaviour, IInteractable
         if(predictedNumber == room.GetCode()[numbersGuessed])
         {
             numbersGuessed++;
-            GetComponent<AudioSource>().PlayOneShot(digitSuccess);
+            AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.digitSuccess);
             if (numbersGuessed == codeLength)
             {
-                GetComponent<AudioSource>().PlayOneShot(codeSuccess);
+                AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeSuccess);
                 GameObject.FindWithTag("Player").GetComponent<Interactor>().Interact();
-                doorToOpen.Open();
+                objectToOpen.Open();
+                room.isCodeSolved = true;
                 IsInteractable = false;
                 ToggleText(false, interactText);
                 ToggleText(false, predictionText);
@@ -121,7 +116,7 @@ public class DrawPad : MonoBehaviour, IInteractable
         else
         {
             numbersGuessed = 0;
-            GetComponent<AudioSource>().PlayOneShot(codeFailed);
+            AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeFail);
         }
         drawingCanvas.ClearTexture();
     }

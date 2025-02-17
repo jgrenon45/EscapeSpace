@@ -9,6 +9,8 @@ public class CodeRoom : Room
     public delegate void OnCodeGenerated();
     public OnCodeGenerated onCodeGenerated;
 
+    public bool isCodeSolved = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {

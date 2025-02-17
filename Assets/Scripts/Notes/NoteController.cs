@@ -1,3 +1,4 @@
+using StarterAssets;
 using System;
 using TMPro;
 using UnityEngine;
@@ -38,8 +39,8 @@ public class NoteController : MonoBehaviour, IInteractable
     }
 
     public void InRange(bool inRange)
-    {        
-        GetComponent<Renderer>().material.SetFloat("_isEnabled", Convert.ToInt32(inRange));
+    {
+        GetComponent<Renderer>().materials[0].SetFloat("_isEnabled", Convert.ToInt32(inRange));
     }
 
     protected virtual void ShowNote()
@@ -47,12 +48,15 @@ public class NoteController : MonoBehaviour, IInteractable
         noteTextAreaUI.text = noteText;
         noteCanvas.SetActive(true);
         isOpen = true;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().DisableInput();
+        AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.noteOpen);
     }
 
     private void HideNote()
     {
         noteCanvas.SetActive(false);
         isOpen = false;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FirstPersonController>().EnableInput();
     }
 
     private void Start()
@@ -61,7 +65,7 @@ public class NoteController : MonoBehaviour, IInteractable
         noteCanvas.SetActive(false);
     }
 
-    private void OnCodeGenerated()
+    protected virtual void OnCodeGenerated()
     {
         if (noteCodeAreaUI)
         {
