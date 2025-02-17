@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
-    private BoxCollider roomBounds;
-
-    [SerializeField] protected Transform[] randomPositions;
+    protected BoxCollider roomBounds;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
-        roomBounds = GetComponent<BoxCollider>();
-        
+        roomBounds = GetComponent<BoxCollider>();        
     }
 
 }

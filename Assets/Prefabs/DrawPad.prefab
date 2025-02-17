@@ -283,7 +283,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 3674377721838794812, guid: 073ccba1a8236cb4db7414b291bca97d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -327,8 +327,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 073ccba1a8236cb4db7414b291bca97d, type: 2}
+  m_sharedMaterial: {fileID: 3674377721838794812, guid: 073ccba1a8236cb4db7414b291bca97d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -759,12 +759,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prompt: Press 'E' to interact
   predictionText: {fileID: 996624817062951205}
+  interactText: {fileID: 3745062496383375370}
   transitionSpeed: 5
   codeLength: 3
   codeSuccess: {fileID: 8300000, guid: 25dca6ca7d10294408d459514684ad13, type: 3}
   codeFailed: {fileID: 8300000, guid: af1d31ddaf213a744a880bae6bb693c0, type: 3}
   digitSuccess: {fileID: 8300000, guid: 62d6c9c30cd656f429c702bbc157e286, type: 3}
   doorToOpen: {fileID: 0}
+  room: {fileID: 0}
   mnist: {fileID: 0}
 --- !u!54 &4415096458107366050
 Rigidbody:

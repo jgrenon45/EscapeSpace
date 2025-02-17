@@ -18,15 +18,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.513
+      value: 3.1998644
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.644
+      value: 0.47336876
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.111
+      value: 1.0375233
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 02b77e4bfecd1a64e86347956c92940a, type: 2}
+    - target: {fileID: 2300000, guid: e845af2424ff57e4aad68e87ea41864e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f3edcbfc85a681b47ad92d0d4b460303, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -87,9 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b17c4669332ea24ca2a52778f1d65b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  room: {fileID: 0}
   noteCanvas: {fileID: 0}
   noteTextAreaUI: {fileID: 0}
-  noteText: Bonjouuuur
+  noteCodeAreaUI: {fileID: 0}
+  noteText: "Je sais que tu es perdu. Que tout \xE7a n\u2019a aucun sens. Tu ne devrais
+    pas \xEAtre ici, pas comme \xE7a. Mais il n\u2019y a pas de temps pour les questions.\n\nLe
+    vaisseau est vide. Ou du moins, il en a l\u2019air. \xC9coute bien. Regarde autour
+    de toi. Quelque chose ne va pas.\n\nLa porte est verrouill\xE9e. Voici le code,
+    mais pour le reste tu devras te d\xE9brouiller.\n\nBonne chance.\n\nJ."
   openEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -112,8 +130,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.238631, y: 0.024372732, z: 0.32322943}
-  m_Center: {x: 0, y: 0.012186366, z: 0}
+  m_Size: {x: 0.30451012, y: 0.057349205, z: 0.4290985}
+  m_Center: {x: 0.0021352768, y: 0.009251118, z: -0.0075915456}
 --- !u!54 &2627815674450665705
 Rigidbody:
   m_ObjectHideFlags: 0
