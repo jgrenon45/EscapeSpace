@@ -24,6 +24,11 @@ public class KeyCard : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public void DisableInteraction()
+    {
+        IsInteractable = false;
+    }
 }
 
     

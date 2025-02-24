@@ -13,4 +13,6 @@ public interface IInteractable
     /// </summary>
     /// <param name="inRange">If the object is in range or not</param>
     public void InRange(bool inRange);
+
+    public void DisableInteraction();
 }

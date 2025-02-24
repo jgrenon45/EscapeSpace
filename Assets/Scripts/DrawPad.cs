@@ -1,4 +1,5 @@
 using StarterAssets;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -60,13 +61,17 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     public void InRange(bool inRange)
     {
-        if (inRange && !isInteracting && IsInteractable)
-        {
-            ToggleText(true, interactText);
-        }
-        else
-        {
-            ToggleText(false, interactText);
+        if (IsInteractable)
+        {          
+            if (inRange && !isInteracting)
+            {
+                ToggleText(true, interactText);
+            }
+            else
+            {
+                ToggleText(false, interactText);
+            }
+
         }
     }
 
@@ -88,36 +93,44 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     public void CheckDrawing()
     {
-        // Get the player drawn texture
-        Texture2D texture = drawingCanvas.drawingTexture;
-
-        //Pass it into the neural network model (digit regognition model)
-        var probabilityAndIndex = mnist.GetMostLikelyDigitProbability(texture);
-
-        probability = probabilityAndIndex.Item1;
-        predictedNumber = probabilityAndIndex.Item2;
-        predictionText.text = predictedNumber.ToString();
-        if(predictedNumber == room.GetCode()[numbersGuessed])
+        if (isInteracting)
         {
-            numbersGuessed++;
-            AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.digitSuccess);
-            if (numbersGuessed == codeLength)
+            // Get the player drawn texture
+            Texture2D texture = drawingCanvas.drawingTexture;
+
+            //Pass it into the neural network model (digit regognition model)
+            var probabilityAndIndex = mnist.GetMostLikelyDigitProbability(texture);
+
+            probability = probabilityAndIndex.Item1;
+            predictedNumber = probabilityAndIndex.Item2;
+            predictionText.text = predictedNumber.ToString();
+            if (predictedNumber == room.GetCode()[numbersGuessed])
             {
-                AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeSuccess);
-                GameObject.FindWithTag("Player").GetComponent<Interactor>().Interact();
-                objectToOpen.Open();
-                room.isCodeSolved = true;
-                IsInteractable = false;
-                ToggleText(false, interactText);
-                ToggleText(false, predictionText);
+                numbersGuessed++;
+                AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.digitSuccess);
+                if (numbersGuessed == codeLength)
+                {
+                    AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeSuccess);
+                    GameObject.FindWithTag("Player").GetComponent<Interactor>().Interact();
+                    objectToOpen.Open();
+                    room.isCodeSolved = true;
+                    DisableInteraction();
+                }
             }
+            else
+            {
+                numbersGuessed = 0;
+                AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeFail);
+            }
+            drawingCanvas.ClearTexture();
+        }
+    }
 
-        }
-        else
-        {
-            numbersGuessed = 0;
-            AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeFail);
-        }
+    public void DisableInteraction()
+    {
+        ToggleText(false, interactText);
+        ToggleText(false, predictionText);
+        IsInteractable = false;
         drawingCanvas.ClearTexture();
     }
 }

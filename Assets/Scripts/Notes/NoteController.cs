@@ -40,7 +40,10 @@ public class NoteController : MonoBehaviour, IInteractable
 
     public void InRange(bool inRange)
     {
-        GetComponent<Renderer>().materials[0].SetFloat("_isEnabled", Convert.ToInt32(inRange));
+        if (IsInteractable)
+        {
+            GetComponent<Renderer>().materials[0].SetFloat("_isEnabled", Convert.ToInt32(inRange));
+        }
     }
 
     protected virtual void ShowNote()
@@ -76,5 +79,10 @@ public class NoteController : MonoBehaviour, IInteractable
     private void OnEnable()
     {
         room.onCodeGenerated += OnCodeGenerated;
+    }
+
+    public void DisableInteraction()
+    {
+        IsInteractable = false;
     }
 }

@@ -43,7 +43,7 @@ public class KeyPad : MonoBehaviour, IInteractable
             {
                 objectToOpen.Open();
                 interactor.hasKeyCard = false;
-                IsInteractable = false;
+                DisableInteraction();
                 AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeSuccess);
             }
             else
@@ -53,4 +53,13 @@ public class KeyPad : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public void DisableInteraction()
+    {
+        interactText.enabled = false;
+        IsInteractable = false;
+        GetComponent<Renderer>().materials[0].SetFloat("_isEnabled", Convert.ToInt32(false));
+    }
+
+    
 }

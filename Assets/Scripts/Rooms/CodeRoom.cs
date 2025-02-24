@@ -1,5 +1,3 @@
-using Mono.Cecil.Cil;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CodeRoom : Room
@@ -17,21 +15,6 @@ public class CodeRoom : Room
         base.Start();
         code = GenerateRandomCode(3);
     }
-
-    //private void SetRandomPositions()
-    //{
-    //    Vector3 previousPos = Vector3.zero;
-    //    for (int i = 0; i < code.Length; i++)
-    //    {
-    //        Vector3 newPos = randomPositions[Random.Range(0, randomPositions.Length)].position;
-    //        while(newPos == previousPos)
-    //        {
-    //            newPos = randomPositions[Random.Range(0, randomPositions.Length)].position;
-    //        }
-    //        Instantiate(numbersPrefabs[code[i]], newPos, Quaternion.identity);
-    //        previousPos = newPos;
-    //    }
-    //}
 
     protected int[] GenerateRandomCode(int codeLength)
     {
