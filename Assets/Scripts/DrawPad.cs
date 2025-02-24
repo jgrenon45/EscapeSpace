@@ -20,6 +20,8 @@ public class DrawPad : MonoBehaviour, IInteractable
 
     [SerializeField] private CodeRoom room;
 
+    [SerializeField] private MeshRenderer[] lights;
+
     public MNISTEngine mnist;
 
     private bool isInteracting = false;
@@ -106,7 +108,11 @@ public class DrawPad : MonoBehaviour, IInteractable
             predictionText.text = predictedNumber.ToString();
             if (predictedNumber == room.GetCode()[numbersGuessed])
             {
+                // Light up the corresponding light
+                lights[numbersGuessed].material.SetColor("_EmissionColor", Color.green);
+
                 numbersGuessed++;
+
                 AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.digitSuccess);
                 if (numbersGuessed == codeLength)
                 {
@@ -119,7 +125,6 @@ public class DrawPad : MonoBehaviour, IInteractable
             }
             else
             {
-                numbersGuessed = 0;
                 AudioManager.instance.soundsAudioSource.PlayOneShot(AudioManager.instance.codeFail);
             }
             drawingCanvas.ClearTexture();

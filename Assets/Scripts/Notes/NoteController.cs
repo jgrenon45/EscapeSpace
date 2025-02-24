@@ -12,13 +12,15 @@ public class NoteController : MonoBehaviour, IInteractable
     [SerializeField] private GameObject noteCanvas;
     [SerializeField] private TMP_Text noteTextAreaUI;
     [SerializeField] protected TMP_Text noteCodeAreaUI;
+    [SerializeField] protected TMP_Text interactText;
+    [SerializeField] protected string prompt;
 
     [Space(10)]
     [SerializeField][TextArea] protected string noteText;
 
     private bool isOpen = false;
 
-    public string InteractionText => throw new System.NotImplementedException();
+    public string InteractionText { get => prompt; }
 
     public bool IsInteractable { get; set; }
 
@@ -43,6 +45,7 @@ public class NoteController : MonoBehaviour, IInteractable
         if (IsInteractable)
         {
             GetComponent<Renderer>().materials[0].SetFloat("_isEnabled", Convert.ToInt32(inRange));
+            ToggleText(inRange, interactText);
         }
     }
 
@@ -66,6 +69,8 @@ public class NoteController : MonoBehaviour, IInteractable
     {
         IsInteractable = true;
         noteCanvas.SetActive(false);
+        interactText.text = InteractionText;
+        ToggleText(false, interactText);
     }
 
     protected virtual void OnCodeGenerated()
@@ -84,5 +89,10 @@ public class NoteController : MonoBehaviour, IInteractable
     public void DisableInteraction()
     {
         IsInteractable = false;
+    }
+
+    private void ToggleText(bool isVisible, TMP_Text textToToggle)
+    {
+        textToToggle.enabled = isVisible;
     }
 }

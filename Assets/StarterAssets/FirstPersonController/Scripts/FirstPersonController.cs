@@ -20,8 +20,12 @@ namespace StarterAssets
 		public float RotationSpeed = 1.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 10.0f;
+        [Tooltip("Player's mesh")]
+        public MeshRenderer PlayerMesh;
+        [Tooltip("Should player's mesh be visible in game")]
+        public bool MeshVisible;
 
-		[Space(10)]
+        [Space(10)]
 		[Tooltip("The height the player can jump")]
 		public float JumpHeight = 1.2f;
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
@@ -112,6 +116,9 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 
 			interactor = GetComponent<Interactor>();
+
+            //Setup player mesh visibility
+            PlayerMesh.enabled = MeshVisible;
         }
 
 		private void Update()
@@ -259,7 +266,7 @@ namespace StarterAssets
 			{
 				interactor.Interact();
 				_input.interact = false;
-			}
+            }
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

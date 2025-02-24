@@ -59,11 +59,12 @@ public class Interactor : MonoBehaviour
                 //Change Camera target and disable player input only if the interactable object has a camera
                 if (targetCamera)
                 {
+                    FirstPersonController fpc = GetComponentInParent<FirstPersonController>();
                     if (!isInteracting)
                     {
                         isInteracting = true;
-                        GetComponentInParent<FirstPersonController>().DisableInput();
-                        
+                        fpc.DisableInput();
+
                         //enable Interact Camera mode
                         targetCamera.enabled = true;
                         Cursor.visible = true;
@@ -71,9 +72,10 @@ public class Interactor : MonoBehaviour
                     }
                     else
                     {
-                        //disable Interact Camera mode
                         isInteracting = false;
-                        GetComponentInParent<FirstPersonController>().EnableInput();                      
+                        fpc.EnableInput();
+
+                        //disable Interact Camera mode
                         targetCamera.enabled = false;
                         Cursor.visible = false;
                         Cursor.lockState = CursorLockMode.Locked;

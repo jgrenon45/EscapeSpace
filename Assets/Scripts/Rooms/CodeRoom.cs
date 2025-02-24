@@ -12,16 +12,23 @@ public class CodeRoom : Room
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
-        base.Start();
-        code = GenerateRandomCode(3);
+        base.Start();    
+        code = GenerateCode(3);
     }
 
-    protected int[] GenerateRandomCode(int codeLength)
+    protected int[] GenerateCode(int codeLength)
     {
-        code = new int[codeLength];
-        for (int i = 0; i < codeLength; i++)
+        if (GameManager.instance.debugModeOn)
         {
-            code[i] = Random.Range(0, 10);
+            code = GameManager.instance.defaultCode;
+        }
+        else
+        {
+            code = new int[codeLength];
+            for (int i = 0; i < codeLength; i++)
+            {
+                code[i] = Random.Range(0, 10);
+            }
         }
         onCodeGenerated?.Invoke();
         return code;
