@@ -1,7 +1,6 @@
 using Cinemachine;
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 
 public class Interactor : MonoBehaviour
 {

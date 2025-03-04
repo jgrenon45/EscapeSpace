@@ -234,6 +234,25 @@
       },
       "url": "https://packages.unity.com"
     },
+    "jp.co.hololab.dnn.base": {
+      "version": "https://github.com/HoloLabInc/HoloLabDnnPackages.git?path=packages/jp.co.hololab.dnn.base",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.sentis": "2.1.2"
+      },
+      "hash": "800214d6cf20df0e1225ae18ea165f6645a91f66"
+    },
+    "jp.co.hololab.dnn.classification": {
+      "version": "https://github.com/HoloLabInc/HoloLabDnnPackages.git?path=packages/jp.co.hololab.dnn.classification",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.sentis": "2.1.2",
+        "jp.co.hololab.dnn.base": "1.0.6"
+      },
+      "hash": "800214d6cf20df0e1225ae18ea165f6645a91f66"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

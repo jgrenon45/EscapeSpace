@@ -2,7 +2,6 @@ using StarterAssets;
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class NoteController : MonoBehaviour, IInteractable
 {
@@ -28,7 +27,7 @@ public class NoteController : MonoBehaviour, IInteractable
     {
         if (IsInteractable)
         {
-            if(!isOpen)
+            if (!isOpen)
             {
                 ShowNote();
 

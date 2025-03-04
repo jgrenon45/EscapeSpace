@@ -1,0 +1,22 @@
+{
+    "name": "EscapeSpace",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:3983cb600bd448a41a089f5415d03f05",
+        "GUID:e6e2e064ca5170640b67dd435effe83a",
+        "GUID:c98377141161c7746a178fb5cb1af075",
+        "GUID:4307f53044263cf4b835bd812fc161a4",
+        "GUID:90c290730bbfa4242ba5144ffed5388c",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

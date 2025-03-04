@@ -1,10 +1,11 @@
-using Unity.Sentis;
+﻿using Unity.Sentis;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MNISTEngine : MonoBehaviour
 {
     public ModelAsset mnistONNX;
+    public TextAsset labelsAsset;
+    public Texture2D testImage;
 
     // engine type
     Worker engine;
@@ -13,17 +14,25 @@ public class MNISTEngine : MonoBehaviour
     static BackendType backendType = BackendType.GPUCompute;
 
     // width and height of the image:
-    const int imageWidth = 28;
+    [SerializeField] private int imageWidth = 28;
 
     // input tensor
     Tensor<float> inputTensor = null;
 
     Camera lookCamera;
 
+    private string[] labels;
+
     void Start()
     {
         // load the neural network model from the asset:
         Model model = ModelLoader.Load(mnistONNX);
+
+        if (labelsAsset)
+        {
+            //Parse neural net labels
+            labels = labelsAsset.text.Split('\n');
+        }
 
         var graph = new FunctionalGraph();
         inputTensor = new Tensor<float>(new TensorShape(1, 1, imageWidth, imageWidth));
@@ -60,6 +69,35 @@ public class MNISTEngine : MonoBehaviour
         var probability = probabilities[predictedNumber];
 
         return (probability, predictedNumber);
+    }
+
+    public void GetMostLikelyObject(Texture2D texture)
+    {
+        GameObject.Find("RenderTex").GetComponent<MeshRenderer>().material.SetTexture("_BaseMap", testImage);
+        // Convert the texture into a tensor, it has width=W, height=W, and channels=1:
+        TextureConverter.ToTensor(testImage, inputTensor, new TextureTransform());
+
+        //Execute neural net
+        engine.Schedule(inputTensor);
+
+        //Read output tensor
+        var probability = engine.PeekOutput("output_0") as Tensor<float>;
+        var item = engine.PeekOutput("output_1") as Tensor<int>;
+
+        // Readback tensors from GPU to CPU
+        Tensor<int> itemCPU = item.ReadbackAndClone();
+        Tensor<float> probabilityCPU = probability.ReadbackAndClone();
+
+        // Now access values safely
+        var ID = itemCPU[0];
+        var accuracy = probabilityCPU[0];
+
+        //The result is output to the console window
+        int percent = Mathf.FloorToInt(accuracy * 100f + 0.5f);
+        Debug.Log($"Prediction: {labels[ID]} {percent}﹪");
+
+        //Clean memory
+        Resources.UnloadUnusedAssets();
     }
 
     // Clean up all our resources at the end of the session so we don't leave anything on the GPU or in memory:
