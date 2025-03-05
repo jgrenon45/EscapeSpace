@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b29f76ba65079cc46a13edeb3f8e20bf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 105735
+  packageName: Grab It
+  packageVersion: 1.0
+  assetPath: Assets/GrabIt/Core/Scripts/GrabIt.cs
+  uploadId: 290321
