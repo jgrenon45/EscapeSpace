@@ -4,6 +4,7 @@ using UnityEngine;
 using HoloLab.DNN.Classification;
 using System.Text.RegularExpressions;
 using System.Linq;
+using Mono.Cecil.Cil;
 
 public class ObjectsRoom : Room
 {
@@ -18,7 +19,7 @@ public class ObjectsRoom : Room
 
     private ClassificationModel model;
     private List<string> labels;
-    private List<string> objectSequence = new List<string>();
+    private List<GrabbableObject> objectSequence = new List<GrabbableObject>();
 
     public delegate void OnSequenceGenerated();
     public OnSequenceGenerated onSequenceGenerated;
@@ -37,21 +38,51 @@ public class ObjectsRoom : Room
 
         // Read Label List from Text Asset
         labels = new List<string>(Regex.Split(names.text, "\r\n|\r|\n"));
+     
+        GenerateObjectSequence();                
+    }
 
-        //Create Random object sequence to be the "code"
-        List<GameObject> tempObjList = possibleObjects.ToList();
-        for (int i = 0; i < sequenceLength; i++)
+    private void GenerateObjectSequence()
+    {
+        if (GameManager.instance.debugModeOn)
         {
-            int randIndex = UnityEngine.Random.Range(0, tempObjList.Count);
-            objectSequence.Add(tempObjList[randIndex].GetComponent<GrabbableObject>()._name);
-            tempObjList.Remove(tempObjList[randIndex]);
+            objectSequence.Add(possibleObjects[0].GetComponent<GrabbableObject>());
+        }
+        else
+        {
+            //Create Random object sequence to be the "code"
+            List<GameObject> tempObjList = possibleObjects.ToList();
+            for (int i = 0; i < sequenceLength; i++)
+            {
+                int randIndex = UnityEngine.Random.Range(0, tempObjList.Count);
+                objectSequence.Add(tempObjList[randIndex].GetComponent<GrabbableObject>());
+                tempObjList.Remove(tempObjList[randIndex]);
+            }
         }
         onSequenceGenerated?.Invoke();
     }
  
     public (ClassificationModel, List<string>) GetModelInfo() { return (model, labels); }
 
-    public List<string> GetObjectSequence() { return objectSequence; }
+    public List<string> GetObjectSequence() 
+    {
+        List<string> objectSequenceToString = new List<string>();
+        foreach (GrabbableObject obj in objectSequence)
+        {
+            objectSequenceToString.Add(obj._identificationName);
+        }   
+        return objectSequenceToString; 
+    }
+
+    public List<string> GetTranslatedObjectSequence()
+    {
+        List<string> objectSequenceToString = new List<string>();
+        foreach (GrabbableObject obj in objectSequence)
+        {
+            objectSequenceToString.Add(obj._translatedName);
+        }
+        return objectSequenceToString;
+    }
 
     private void OnDestroy()
     {
