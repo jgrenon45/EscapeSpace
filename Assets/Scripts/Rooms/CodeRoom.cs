@@ -4,9 +4,6 @@ public class CodeRoom : Room
 {   
     protected int[] code;
 
-    public delegate void OnCodeGenerated();
-    public OnCodeGenerated onCodeGenerated;
-
     public bool isCodeSolved = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,7 +27,6 @@ public class CodeRoom : Room
                 code[i] = Random.Range(0, 10);
             }
         }
-        onCodeGenerated?.Invoke();
         return code;
     }
 

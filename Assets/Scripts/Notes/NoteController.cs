@@ -72,31 +72,6 @@ public class NoteController : MonoBehaviour, IInteractable
         ToggleText(false, interactText);
     }
 
-    protected virtual void OnCodeGenerated()
-    {
-        if (noteCodeAreaUI)
-        {
-            noteCodeAreaUI.text = room.GetComponent<CodeRoom>().GetCodeToString();
-        }
-    }
-
-    protected virtual void OnSequenceGenerated()
-    {
-        if (noteCodeAreaUI)
-        {
-            noteCodeAreaUI.text = "";
-            room.GetComponent<ObjectsRoom>().GetTranslatedObjectSequence().ForEach(x => noteCodeAreaUI.text += x + ' ');
-        }
-    }
-
-    private void OnEnable()
-    {
-        if(room is CodeRoom)
-            room.GetComponent<CodeRoom>().onCodeGenerated += OnCodeGenerated;
-        else if(room is ObjectsRoom)
-            room.GetComponent<ObjectsRoom>().onSequenceGenerated += OnSequenceGenerated;
-    }
-
     public void DisableInteraction()
     {
         IsInteractable = false;

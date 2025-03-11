@@ -20,10 +20,5 @@ public class BottleNote : NoteController
         }
         noteCodeAreaUI.enabled = false;
         base.ShowNote();
-    }
-
-    protected override void OnCodeGenerated()
-    {
-        //Do nothing
-    }
+    }  
 }
