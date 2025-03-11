@@ -116,9 +116,8 @@ namespace Lightbug.GrabIt
 			
 
 				if( Input.GetMouseButtonUp(0) )
-				{				
-					Reset();
-					m_grabbing = false;
+				{
+					Ungrab();
 				}
 				else if ( Input.GetMouseButtonDown(1) )
 				{
@@ -177,19 +176,22 @@ namespace Lightbug.GrabIt
 		}
 
 		void Reset()
-		{		
-			//Grab Properties	
-			m_targetRB.useGravity = m_defaultProperties.m_useGravity;
-			m_targetRB.linearDamping = m_defaultProperties.m_drag;
-			m_targetRB.angularDamping = m_defaultProperties.m_angularDrag;
-			m_targetRB.constraints = m_defaultProperties.m_constraints;
+		{
+			if (m_targetRB)
+			{
+				//Grab Properties	
+				m_targetRB.useGravity = m_defaultProperties.m_useGravity;
+				m_targetRB.linearDamping = m_defaultProperties.m_drag;
+				m_targetRB.angularDamping = m_defaultProperties.m_angularDrag;
+				m_targetRB.constraints = m_defaultProperties.m_constraints;
 		
-			m_targetRB = null;
+				m_targetRB = null;
 
-			m_hitPointObject.transform.SetParent(null);
+				m_hitPointObject.transform.SetParent(null);
 		
-			if(m_lineRenderer != null)
-				m_lineRenderer.enabled = false;
+				if(m_lineRenderer != null)
+					m_lineRenderer.enabled = false;
+			}
 		}
 
 		void Grab()
@@ -252,6 +254,12 @@ namespace Lightbug.GrabIt
 				m_applyImpulse = false;
 			}
 		
+		}
+
+		public void Ungrab()
+		{
+			Reset();
+			m_grabbing = false;
 		}
 
 	}

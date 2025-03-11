@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour, IInteractable
 {
-    [SerializeField] protected CodeRoom room;
+    [SerializeField] protected Room room;
 
     [Header("UI Text")]
     [SerializeField] private GameObject noteCanvas;
@@ -76,13 +76,14 @@ public class NoteController : MonoBehaviour, IInteractable
     {
         if (noteCodeAreaUI)
         {
-            noteCodeAreaUI.text = room.GetCodeToString();
+            noteCodeAreaUI.text = room.GetComponent<CodeRoom>().GetCodeToString();
         }
     }
 
     private void OnEnable()
     {
-        room.onCodeGenerated += OnCodeGenerated;
+        if(room is CodeRoom)
+            room.GetComponent<CodeRoom>().onCodeGenerated += OnCodeGenerated;
     }
 
     public void DisableInteraction()
