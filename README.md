@@ -1,8 +1,8 @@
 # EscapeSpace
-Escape Space est un projet étudiant solo d'un jeu de résolution d'énigmes à la première personne, basé sur des capacités d'intelligence artificielle. 
+Escape Space est un projet étudiant solo d'un jeu de résolution d'énigmes à la première personne, basé sur des capacités d'intelligence artificielle. Il s'agit d'un projet développé avec Unity (version 6000.0.38f1)
 
 ## Unity Sentis
-L'intelligence artificielle est ajoutée grâce à [Unity Sentis](https://unity.com/products/sentis). Plusieurs modèles sont disponibles sur le site d'[Hugging Face](https://huggingface.co/models?library=onnx,unity-sentis&sort=trending) et voici ceux utilisés dans le jeu :
+L'intelligence artificielle est ajoutée grâce à [Unity Sentis](https://unity.com/products/sentis) (version 2.1.2). Plusieurs modèles sont disponibles sur le site d'[Hugging Face](https://huggingface.co/models?library=onnx,unity-sentis&sort=trending) et voici ceux utilisés dans le jeu :
 
 ### Détection d'écriture humaine
 Ce modèle permet de détecter un chiffre dessiné par un utilisateur. Pour ce faire, j'utilise un matériel sur lequel le joueur peut dessiner en utilisant sa souris. Je récupère ensuite la texture de ce matériel et le modèle d'IA la traite et retourne sa prédiction. Les résultats sont souvent satisfaisants. Quelques fois, le modèle peut se tromper, mais si on dessine avec précision le chiffre, tout devrait se dérouler comme prévu. Le joueur utilise donc ce système pour ouvrir des portes. Un code est caché et celui-ci doit le trouver et l'écrire dans le panneau. Il s'agit de codes à trois chiffres, et chacun doit être entré individuellement. Les lumières au dessus du panneau donnent une rétroaction quant au code entré.
@@ -31,6 +31,14 @@ Ce système est utilisé afin d'éviter la répétition de code au travers de pl
 
 ### Intéraction
 Un système d'intéraction modulable est également en place afin d'ajouter facilement et rapidement des intéractions avec des objets. La plupart des interactions de ce système se font avec la touche 'E'. Cependant, un autre script gère un autre type d'intéraction. Certains objets peuvent être pris par le joueur à l'aide du clic gauche. Un curseur apparaît lorsque l'interaction est possible.
+
+## Assets utilisés
+- https://assetstore.unity.com/packages/3d/props/free-sport-balls-293937
+- https://assetstore.unity.com/packages/tools/physics/grab-it-105735
+- https://assetstore.unity.com/packages/3d/props/mobile-power-ups-free-vol-1-36106
+- https://assetstore.unity.com/packages/3d/props/interior/office-pack-free-258600
+- https://assetstore.unity.com/packages/essentials/starter-assets-firstperson-updates-in-new-charactercontroller-pa-196525
+- https://assetstore.unity.com/packages/3d/props/tools/survival-game-tools-139872
 
 
 
